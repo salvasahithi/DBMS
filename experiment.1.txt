@@ -1,0 +1,110 @@
+
+mysql> \c
+mysql> create database faculty
+    -> create database faculty;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create database faculty' at line 2
+mysql> create database faculty;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| faculty            |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use faculty;
+Database changed
+mysql> create table faculty(faculty_identifier varchar(4),faculty_name varchar(15),gender varchar(5),date_of_birth int,date_of_join int,mobile_number int(10));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc faculty;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| faculty_identifier | varchar(4)  | YES  |     | NULL    |       |
+| faculty_name       | varchar(15) | YES  |     | NULL    |       |
+| gender             | varchar(5)  | YES  |     | NULL    |       |
+| date_of_birth      | int(11)     | YES  |     | NULL    |       |
+| date_of_join       | int(11)     | YES  |     | NULL    |       |
+| mobile_number      | int(10)     | YES  |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> alter table faculty add primary key(faculty_identifier);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| faculty_identifier | varchar(4)  | NO   | PRI |         |       |
+| faculty_name       | varchar(15) | YES  |     | NULL    |       |
+| gender             | varchar(5)  | YES  |     | NULL    |       |
+| date_of_birth      | int(11)     | YES  |     | NULL    |       |
+| date_of_join       | int(11)     | YES  |     | NULL    |       |
+| mobile_number      | int(10)     | YES  |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> alter table faculty;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> drop column date_of_join;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column date_of_join' at line 1
+mysql> drop column date_of_join_type;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column date_of_join_type' at line 1
+mysql> alter table faculty drop date_of_join;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| faculty_identifier | varchar(4)  | NO   | PRI |         |       |
+| faculty_name       | varchar(15) | YES  |     | NULL    |       |
+| gender             | varchar(5)  | YES  |     | NULL    |       |
+| date_of_birth      | int(11)     | YES  |     | NULL    |       |
+| mobile_number      | int(10)     | YES  |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> alter table faculty modify mobile_number int not null;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| faculty_identifier | varchar(4)  | NO   | PRI |         |       |
+| faculty_name       | varchar(15) | YES  |     | NULL    |       |
+| gender             | varchar(5)  | YES  |     | NULL    |       |
+| date_of_birth      | int(11)     | YES  |     | NULL    |       |
+| mobile_number      | int(11)     | NO   |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> alter table faculty add column date_of_join int;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| faculty_identifier | varchar(4)  | NO   | PRI |         |       |
+| faculty_name       | varchar(15) | YES  |     | NULL    |       |
+| gender             | varchar(5)  | YES  |     | NULL    |       |
+| date_of_birth      | int(11)     | YES  |     | NULL    |       |
+| mobile_number      | int(11)     | NO   |     | NULL    |       |
+| date_of_join       | int(11)     | YES  |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
