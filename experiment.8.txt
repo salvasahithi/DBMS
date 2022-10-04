@@ -1,0 +1,21 @@
+mysql>  select product_qty,product_rate from product where product_rate>(select avg(product_rate)from product)order by product_qty;
++-------------+--------------+
+| product_qty | product_rate |
++-------------+--------------+
+|           2 |           30 |
+|           2 |           20 |
+|           3 |           25 |
++-------------+--------------+
+3 rows in set (0.05 sec)
+
+mysql> select* from product where exists(select avg(product_rate)from product);
++------------+-----------------+-------------+--------------+--------------+
+| product_no | product_company | product_qty | product_rate | product_cost |
++------------+-----------------+-------------+--------------+--------------+
+|          1 |              10 |           2 |           10 |           20 |
+|          2 |               9 |           3 |           25 |           75 |
+|          3 |              10 |           2 |           30 |           60 |
+|          4 |               8 |           5 |           10 |           50 |
+|          5 |               9 |           2 |           20 |           40 |
++------------+-----------------+-------------+--------------+--------------+
+5 rows in set (0.00 sec)
