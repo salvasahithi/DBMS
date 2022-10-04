@@ -1,0 +1,82 @@
+
+mysql>  alter table faculty add check(gender='m'or'f');
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| faculty_identifier | varchar(4)  | NO   | PRI |         |       |
+| faculty_name       | varchar(15) | YES  |     | NULL    |       |
+| gender             | varchar(5)  | YES  |     | NULL    |       |
+| date_of_birth      | int(11)     | YES  |     | NULL    |       |
+| mobile_number      | int(11)     | NO   |     | NULL    |       |
+| date_of_join       | int(11)     | YES  |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql>alter table faculty add check(faculty_identifier>=1&&faculty_identifier<=6);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| faculty_identifier | varchar(4)  | NO   | PRI |         |       |
+| faculty_name       | varchar(15) | YES  |     | NULL    |       |
+| gender             | varchar(5)  | YES  |     | NULL    |       |
+| date_of_birth      | int(11)     | YES  |     | NULL    |       |
+| mobile_number      | int(11)     | NO   |     | NULL    |       |
+| date_of_join       | int(11)     | YES  |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+ mysql> alter table faculty add column first_name varchar(10);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| faculty_identifier | varchar(4)  | NO   | PRI |         |       |
+| faculty_name       | varchar(15) | YES  |     | NULL    |       |
+| gender             | varchar(5)  | YES  |     | NULL    |       |
+| date_of_birth      | int(11)     | YES  |     | NULL    |       |
+| mobile_number      | int(11)     | NO   |     | NULL    |       |
+| date_of_join       | int(11)     | YES  |     | NULL    |       |
+| first_name         | varchar(10) | YES  |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql>  alter table faculty add constraint faculty_name_unique unique(first_name);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| faculty_identifier | varchar(4)  | NO   | PRI |         |       |
+| faculty_name       | varchar(15) | YES  |     | NULL    |       |
+| gender             | varchar(5)  | YES  |     | NULL    |       |
+| date_of_birth      | int(11)     | YES  |     | NULL    |       |
+| mobile_number      | int(11)     | NO   |     | NULL    |       |
+| date_of_join       | int(11)     | YES  |     | NULL    |       |
+| first_name         | varchar(10) | YES  | UNI | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+mysql>  alter table dept add foreign key(dept_no) references course(semno);
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc dept;
++-----------+---------+------+-----+---------+-------+
+| Field     | Type    | Null | Key | Default | Extra |
++-----------+---------+------+-----+---------+-------+
+| dept_name | char(1) | YES  |     | NULL    |       |
+| dept_no   | int     | YES  | MUL | NULL    |       |
+| dept_head | char(1) | YES  |     | NULL    |       |
++-----------+---------+------+-----+---------+-------+
+3 rows in set (0.07 sec)
