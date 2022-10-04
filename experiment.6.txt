@@ -1,0 +1,141 @@
+mysql> select* from product;
++------------+-----------------+-------------+--------------+--------------+
+| product_no | product_company | product_qty | product_rate | product_cost |
++------------+-----------------+-------------+--------------+--------------+
+|          1 |              10 |           2 |           10 |           20 |
+|          2 |               9 |           3 |           25 |           75 |
+|          3 |              10 |           2 |           30 |           60 |
+|          4 |               8 |           5 |           10 |           50 |
+|          5 |               9 |           2 |           20 |           40 |
++------------+-----------------+-------------+--------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select count(*) from product;where rate>=20;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.04 sec)
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where rate>=20' at line 1
+mysql> select count(*) from product where rate>=20;
+ERROR 1054 (42S22): Unknown column 'rate' in 'where clause'
+mysql> select count(*) from product where rate>=10;
+ERROR 1054 (42S22): Unknown column 'rate' in 'where clause'
+mysql> select count(*) from product where rate>=5;
+ERROR 1054 (42S22): Unknown column 'rate' in 'where clause'
+mysql> select count(*) from product where rate>=20;
+ERROR 1054 (42S22): Unknown column 'rate' in 'where clause'
+mysql> select count(*) from product where rate>=30;
+ERROR 1054 (42S22): Unknown column 'rate' in 'where clause'
+mysql> select count(*) from product where product_rate>=20;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select sum(cost)from product;
+ERROR 1054 (42S22): Unknown column 'cost' in 'field list'
+mysql> select sum(product_cost) from product;
++-------------------+
+| sum(product_cost) |
++-------------------+
+|               245 |
++-------------------+
+1 row in set (0.04 sec)
+
+mysql> select avg(product_cost) from product;
++-------------------+
+| avg(product_cost) |
++-------------------+
+|           49.0000 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select max(product_rate) from product;
++-------------------+
+| max(product_rate) |
++-------------------+
+|                30 |
++-------------------+
+1 row in set (0.03 sec)
+
+mysql> select min(product_rate) from product;
++-------------------+
+| min(product_rate) |
++-------------------+
+|                10 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct cost from product;
+ERROR 1054 (42S22): Unknown column 'cost' in 'field list'
+mysql> select distinct product_cost from product;
++--------------+
+| product_cost |
++--------------+
+|           20 |
+|           75 |
+|           60 |
+|           50 |
+|           40 |
++--------------+
+5 rows in set (0.00 sec)
+
+mysql> select* from product where cost between 20 and 60;
+ERROR 1054 (42S22): Unknown column 'cost' in 'where clause'
+mysql> select* from product where product_cost between 20 and 60;
++------------+-----------------+-------------+--------------+--------------+
+| product_no | product_company | product_qty | product_rate | product_cost |
++------------+-----------------+-------------+--------------+--------------+
+|          1 |              10 |           2 |           10 |           20 |
+|          3 |              10 |           2 |           30 |           60 |
+|          4 |               8 |           5 |           10 |           50 |
+|          5 |               9 |           2 |           20 |           40 |
++------------+-----------------+-------------+--------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select* from product where product_rate in(25);
++------------+-----------------+-------------+--------------+--------------+
+| product_no | product_company | product_qty | product_rate | product_cost |
++------------+-----------------+-------------+--------------+--------------+
+|          2 |               9 |           3 |           25 |           75 |
++------------+-----------------+-------------+--------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select* from product where not product_rate=25;
++------------+-----------------+-------------+--------------+--------------+
+| product_no | product_company | product_qty | product_rate | product_cost |
++------------+-----------------+-------------+--------------+--------------+
+|          1 |              10 |           2 |           10 |           20 |
+|          3 |              10 |           2 |           30 |           60 |
+|          4 |               8 |           5 |           10 |           50 |
+|          5 |               9 |           2 |           20 |           40 |
++------------+-----------------+-------------+--------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select* from product where rate not in(10);
+ERROR 1054 (42S22): Unknown column 'rate' in 'where clause'
+mysql> select* from product where product_rate in(10);
++------------+-----------------+-------------+--------------+--------------+
+| product_no | product_company | product_qty | product_rate | product_cost |
++------------+-----------------+-------------+--------------+--------------+
+|          1 |              10 |           2 |           10 |           20 |
+|          4 |               8 |           5 |           10 |           50 |
++------------+-----------------+-------------+--------------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> select all product_no from product where true;
++------------+
+| product_no |
++------------+
+|          1 |
+|          2 |
+|          3 |
+|          4 |
+|          5 |
++------------+
+5 rows in set (0.00 sec)
