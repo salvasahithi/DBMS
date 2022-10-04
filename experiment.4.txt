@@ -1,0 +1,38 @@
+mysql> update faculty set faculty_identifier=2 where name='poorna';
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+mysql> update faculty set faculty_identifier=2 where faculty_name='poorna';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from faculty;
++--------------------+--------------+--------+---------------+--------------+------------+
+| faculty_identifier | faculty_name | gender | date_of_birth | date_of_join | first_name |
++--------------------+--------------+--------+---------------+--------------+------------+
+| 2                  | poorna       |     m  |         2004  |         2020 |      salva |
++--------------------+--------------+--------+---------------+--------------+------------+
+1 row in set (0.00 sec)
+
+mysql>  insert into faculty values(1,'anitha','f',1997,2019,'vijay');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * faculty;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'faculty' at line 1
+mysql> select * from faculty;
++--------------------+--------------+--------+---------------+--------------+------------+
+| faculty_identifier | faculty_name | gender | date_of_birth | date_of_join | first_name |
++--------------------+--------------+--------+---------------+--------------+------------+
+| 1                  | anitha       | f      |        1997   |         2019 | vijay      |
+| 2                  | poorna       | m      |        2004   |        2020  | salva      |
++--------------------+--------------+--------+---------------+--------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> delete from faculty where faculty_identifier='2';
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  select * from faculty;
++--------------------+--------------+--------+---------------+--------------+------------+
+| faculty_identifier | faculty_name | gender | date_of_birth | date_of_join | first_name |
++--------------------+--------------+--------+---------------+--------------+------------+
+| 1                  | anitha       | f      |          1997 |         2019 | vijay      |
++--------------------+--------------+--------+---------------+--------------+------------+
+1 row in set (0.00 sec)
