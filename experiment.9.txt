@@ -1,0 +1,71 @@
+mysql> use faculty;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_faculty |
++-------------------+
+| faculty           |
+| faculty_view      |
+| product           |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from faculty;
++--------------------+--------------+--------+---------------+--------------+------------+
+| faculty_identifier | faculty_name | gender | date_of_birth | date_of_join | first_name |
++--------------------+--------------+--------+---------------+--------------+------------+
+| 1                  | vijay        | m      |          1995 |         2020 | salva      |
++--------------------+--------------+--------+---------------+--------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select* from faculty_view;
++--------------+--------+
+| faculty_name | gender |
++--------------+--------+
+| vijay        | m      |
++--------------+--------+
+1 row in set (0.01 sec)
+
+mysql> faculty.faculty_identifier,faculty_view,faculty_name,faculty_view,gender from faculty inner join faculty_view on faculty.gender=faculty_view.gender;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'faculty.faculty_identifier,faculty_view,faculty_name,faculty_view,gender from fa' at line 1
+mysql> select faculty.faculty_identifier,faculty_view,faculty_name,faculty_view,gender from faculty inner join faculty_view on faculty.gender=faculty_view.gender;
+ERROR 1054 (42S22): Unknown column 'faculty_view' in 'field list'
+mysql> select faculty.faculty_identifier,faculty_view,faculty_name,gender from faculty inner join faculty_view on faculty.gender=faculty_view.gender;
+ERROR 1054 (42S22): Unknown column 'faculty_view' in 'field list'
+mysql> select faculty.faculty_identifier,date_of_join,faculty_name,gender from faculty inner join date_of_join on faculty.gender=date_of_join.gender;
+ERROR 1146 (42S02): Table 'faculty.date_of_join' doesn't exist
+mysql> select faculty.faculty_identifier,faculty_view,faculty_name,faculty_view,gender from faculty inner join faculty_view on faculty.gender=faculty_ view.gender;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'view.gender' at line 1
+mysql> select faculty.faculty_identifier,faculty_view,faculty_name,faculty_view,gender from faculty inner join faculty_view on faculty.gender=faculty_ view,gender;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'view,gender' at line 1
+mysql>  select faculty.faculty_identifier,faculty_view.faculty_name,faculty_view.gender from faculty inner join faculty_view on faculty.gender=faculty_view.gender;
++--------------------+--------------+--------+
+| faculty_identifier | faculty_name | gender |
++--------------------+--------------+--------+
+| 1                  | vijay        | m      |
++--------------------+--------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select faculty.faculty_identifier,faculty_view.faculty_name,faculty_view.gender from faculty left join faculty_view on faculty.gender=faculty_view.gender order by faculty.faculty_identifier;
++--------------------+--------------+--------+
+| faculty_identifier | faculty_name | gender |
++--------------------+--------------+--------+
+| 1                  | vijay        | m      |
++--------------------+--------------+--------+
+1 row in set (0.00 sec)
+
+mysql>  select faculty.faculty_identifier,faculty_view.faculty_name,faculty_view.gender from faculty right join faculty_view on faculty.gender=faculty_view.gender order by faculty_view.faculty_name;
++--------------------+--------------+--------+
+| faculty_identifier | faculty_name | gender |
++--------------------+--------------+--------+
+| 1                  | vijay        | m      |
++--------------------+--------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select faculty.faculty_identifier,faculty_view.faculty_name from faculty cross join faculty_view;
++--------------------+--------------+
+| faculty_identifier | faculty_name |
++--------------------+--------------+
+| 1                  | vijay        |
++--------------------+--------------+
+1 row in set (0.00 sec)
