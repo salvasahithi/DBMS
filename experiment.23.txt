@@ -1,0 +1,69 @@
+mysql> \c
+mysql> create database hospital;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| book               |
+| course             |
+| dbtest2            |
+| department         |
+| employee           |
+| faculty            |
+| hospital           |
+| mysql              |
+| performance_schema |
+| product            |
+| student            |
+| teacher            |
+| test               |
+| user               |
++--------------------+
+15 rows in set (0.00 sec)
+
+mysql> use hospital;
+Database changed
+mysql> create table hospital;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> create table hospital(pno int,pname varchar(16),admitdate date,ischarge date);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> use hospital;
+Database changed
+mysql> insert into hospital values(1,'ravi','8-06-1974','8-06-1974');
+ERROR 1292 (22007): Incorrect date value: '8-06-1974' for column 'admitdate' at row 1
+mysql> insert into hospital values(1,'ravi','08-06-1974','08-06-1974',);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> insert into hospital values(1,'ravi','1974-06-08','1974-06-08');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into hospital values(2,'patlu','2003-12-29','2003-12-29');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into hospital values(3,'motu','2004-09-06','2004-09-06');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select* from hospital;
++------+-------+------------+------------+
+| pno  | pname | admitdate  | ischarge   |
++------+-------+------------+------------+
+|    1 | ravi  | 1974-06-08 | 1974-06-08 |
+|    2 | patlu | 2003-12-29 | 2003-12-29 |
+|    3 | motu  | 2004-09-06 | 2004-09-06 |
++------+-------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from hospital where pno=3;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select* from hospital;
++------+-------+------------+------------+
+| pno  | pname | admitdate  | ischarge   |
++------+-------+------------+------------+
+|    1 | ravi  | 1974-06-08 | 1974-06-08 |
+|    2 | patlu | 2003-12-29 | 2003-12-29 |
++------+-------+------------+------------+
+2 rows in set (0.01 sec)
