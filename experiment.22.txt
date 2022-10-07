@@ -1,0 +1,134 @@
+mysql> create table book;
+ERROR 1046 (3D000): No database selected
+mysql> create database book;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| book               |
+| course             |
+| dbtest2            |
+| department         |
+| employee           |
+| faculty            |
+| mysql              |
+| performance_schema |
+| product            |
+| student            |
+| teacher            |
+| test               |
+| user               |
++--------------------+
+14 rows in set (0.04 sec)
+
+mysql> use book;
+Database changed
+mysql> create table book(publisher_name varchar(10),book_name varchar(20),written_by varchar(23),cost int(12));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc book;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| publisher_name | varchar(10) | YES  |     | NULL    |       |
+| book_name      | varchar(20) | YES  |     | NULL    |       |
+| written_by     | varchar(23) | YES  |     | NULL    |       |
+| cost           | int(12)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+mysql> alter table book add primary key(publisher_name);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc book;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| publisher_name | varchar(10) | NO   | PRI |         |       |
+| book_name      | varchar(20) | YES  |     | NULL    |       |
+| written_by     | varchar(23) | YES  |     | NULL    |       |
+| cost           | int(12)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+mysql> insert into book values('bheem','the monk','jungle',800);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into book values('harry','the tom','motu',850);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into book values('the fish','the lion','sai',900);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into book values('the mount','poori',950);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into book values('penguin','thegodofsmallthings','poorna',950);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into book values('ram','kalyan','rohith',700);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into book values('aravindh','chaai','varun',750);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select* from book;
++----------------+---------------------+------------+------+
+| publisher_name | book_name           | written_by | cost |
++----------------+---------------------+------------+------+
+| aravindh       | chaai               | varun      |  750 |
+| bheem          | the monk            | jungle     |  800 |
+| harry          | the tom             | motu       |  850 |
+| penguin        | thegodofsmallthings | poorna     |  950 |
+| ram            | kalyan              | rohith     |  700 |
+| the fish       | the lion            | sai        |  900 |
++----------------+---------------------+------------+------+
+6 rows in set (0.00 sec)
+
+mysql> select publisher_name from book where cost<=550;
+Empty set (0.05 sec)
+
+mysql> select publisher_name from book where cost<=750;
++----------------+
+| publisher_name |
++----------------+
+| aravindh       |
+| ram            |
++----------------+
+2 rows in set (0.00 sec)
+
+mysql> select count(*) from book;where cost>=700;
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.05 sec)
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where cost>=700' at line 1
+mysql> select count(*) from book;where cost>=700;
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.00 sec)
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where cost>=700' at line 1
+mysql> alter table book add constraint book_name_unique unique(cost);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc book;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| publisher_name | varchar(10) | NO   | PRI |         |       |
+| book_name      | varchar(20) | YES  |     | NULL    |       |
+| written_by     | varchar(23) | YES  |     | NULL    |       |
+| cost           | int(12)     | YES  | UNI | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
