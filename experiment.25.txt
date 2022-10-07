@@ -1,0 +1,93 @@
+mysql> \c
+mysql> create database st_progress;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| book               |
+| car                |
+| course             |
+| dbtest2            |
+| department         |
+| employee           |
+| faculty            |
+| hospital           |
+| mysql              |
+| performance_schema |
+| product            |
+| st_progress        |
+| student            |
+| teacher            |
+| test               |
+| user               |
++--------------------+
+17 rows in set (0.05 sec)
+
+mysql> use st_progress;
+Database changed
+mysql> create table st_progress(st_no int,st_name varchar(15),subject varchar(18),marks int
+    ->
+    ->
+    -> create table st_progress(st_no int,st_name varchar(15),subject varchar(18),marks int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create table st_progress(st_no int,st_name varchar(15),subject varchar(18),marks' at line 4
+mysql> create table std_progress(std_no int,std_name varchar(15),subject varchar(18),marks int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc std_progress;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| std_no   | int(11)     | YES  |     | NULL    |       |
+| std_name | varchar(15) | YES  |     | NULL    |       |
+| subject  | varchar(18) | YES  |     | NULL    |       |
+| marks    | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.06 sec)
+
+mysql> insert table std_progress values(1,'jatka','maths',70),(2,'atharva','physics',82),(3,'surya','chemistry',85);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table std_progress values(1,'jatka','maths',70),(2,'atharva','physics',82),(3,'s' at line 1
+mysql> insert into std_progress values(1,'jatka','maths',70),(2,'atharva','physics',82),(3,'surya','chemistry',85);
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select* from std_progress;
++--------+----------+-----------+-------+
+| std_no | std_name | subject   | marks |
++--------+----------+-----------+-------+
+|      1 | jatka    | maths     |    70 |
+|      2 | atharva  | physics   |    82 |
+|      3 | surya    | chemistry |    85 |
++--------+----------+-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table std_progress add std_dept varchar(18);
+Query OK, 3 rows affected (0.07 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select* from std_progress;
++--------+----------+-----------+-------+----------+
+| std_no | std_name | subject   | marks | std_dept |
++--------+----------+-----------+-------+----------+
+|      1 | jatka    | maths     |    70 | NULL     |
+|      2 | atharva  | physics   |    82 | NULL     |
+|      3 | surya    | chemistry |    85 | NULL     |
++--------+----------+-----------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> update std_progress set std_dept='CSE' where std_name='earnest';
+Query OK, 0 rows affected (0.04 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select* from std_progress;
++--------+----------+-----------+-------+----------+
+| std_no | std_name | subject   | marks | std_dept |
++--------+----------+-----------+-------+----------+
+|      1 | jatka    | maths     |    70 | NULL     |
+|      2 | atharva  | physics   |    82 | NULL     |
+|      3 | surya    | chemistry |    85 | NULL     |
++--------+----------+-----------+-------+----------+
+3 rows in set (0.00 sec)
