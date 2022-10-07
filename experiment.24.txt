@@ -1,0 +1,68 @@
+mysql> \c
+mysql> create database car;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| book               |
+| car                |
+| course             |
+| dbtest2            |
+| department         |
+| employee           |
+| faculty            |
+| hospital           |
+| mysql              |
+| performance_schema |
+| product            |
+| student            |
+| teacher            |
+| test               |
+| user               |
++--------------------+
+16 rows in set (0.00 sec)
+
+mysql> use car;
+Database changed
+mysql> create table car(carno int,carname varchar(13),dor date,returndate date);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc car;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| carno      | int(11)     | YES  |     | NULL    |       |
+| carname    | varchar(13) | YES  |     | NULL    |       |
+| dor        | date        | YES  |     | NULL    |       |
+| returndate | date        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into car values (1,'audi','1984-11-20','1984-11-20'),(2,'benz','2003-12-29'),(3,'bmw','2022-12-29','2022-12-29'),(4,'rangerover','1994-11-15','1994-11-15');
+ERROR 1136 (21S01): Column count doesn't match value count at row 2
+mysql> insert into car values (1,'audi','1984-11-20','1984-11-20'),(2,'benz','2003-12-29','2003-12-29'),(3,'bmw','2022-12-29','2022-12-29'),(4,'rangerover','1994-11-15','1994-11-15');
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select* from car;
++-------+------------+------------+------------+
+| carno | carname    | dor        | returndate |
++-------+------------+------------+------------+
+|     1 | audi       | 1984-11-20 | 1984-11-20 |
+|     2 | benz       | 2003-12-29 | 2003-12-29 |
+|     3 | bmw        | 2022-12-29 | 2022-12-29 |
+|     4 | rangerover | 1994-11-15 | 1994-11-15 |
++-------+------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select carname,dor,returndate from car where carno<3;
++---------+------------+------------+
+| carname | dor        | returndate |
++---------+------------+------------+
+| audi    | 1984-11-20 | 1984-11-20 |
+| benz    | 2003-12-29 | 2003-12-29 |
++---------+------------+------------+
+2 rows in set (0.00 sec)
